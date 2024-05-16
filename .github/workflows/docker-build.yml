@@ -1,0 +1,35 @@
+name: docker-build
+
+on:
+  push:
+    #branches: [ main ]
+    tags: ["v*.*.*"]
+
+env:
+  IMAGE_NAME: almosquera/test-tema-12
+  sha: ${{github.event.pull_request.head.sha || github.event.aftert}}      
+  DOKERFILE_PATH: Dokerfile
+
+jobs:
+  test_and_build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkuot repository
+      uses: actions/checkout@v3
+      whith:
+         ref: ${{env.SHA}}
+
+    - name: Setup Docker buildx
+      uses: docker/setup-buildx-action@v2
+      
+
+    - name: log into registry
+      uses: docker/login-action@v2
+      with:
+        username: almosquera
+        password: ${{secrets.CDPRUEBA_PAT}}
+
+   

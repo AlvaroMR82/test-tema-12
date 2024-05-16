@@ -19,7 +19,7 @@ jobs:
 
     - name: Checkuot repository
       uses: actions/checkout@v3
-      whith:
+      with:
          ref: ${{env.SHA}}
 
     - name: Setup Docker buildx
